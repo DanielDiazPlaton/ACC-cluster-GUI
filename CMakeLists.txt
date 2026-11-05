@@ -1,22 +1,21 @@
 cmake_minimum_required(VERSION 3.16)
-project(mi_interfaz_lvgl C CXX)
+project(ACC_cluster_GUI C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
-# 1. Decirle a LVGL explícitamente dónde está lv_conf.h
 set(LV_CONF_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lv_conf.h CACHE STRING "" FORCE)
 add_definitions(-DLV_CONF_INCLUDE_SIMPLE)
 
-# 2. Rutas de include
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
 
-# 3. Agregar el submódulo de LVGL
 add_subdirectory(lvgl)
 
-# 4. Archivos fuentes
 set(SOURCES
     src/main.cpp
-    src/ui.cpp
+    src/ui/cluster_view.cpp
 )
 
 add_executable(Cluster_GUI ${SOURCES})
