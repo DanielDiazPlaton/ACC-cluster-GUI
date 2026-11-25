@@ -7,7 +7,7 @@
 #include <unistd.h>
 
 #define SCREEN_RES_X 1024
-#define SCREEN_RES_Y 400
+#define SCREEN_RES_Y 600
 
 int main() {
     lv_init();
