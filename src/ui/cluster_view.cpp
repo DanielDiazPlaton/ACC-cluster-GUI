@@ -17,26 +17,26 @@ void ClusterView::create_header(lv_obj_t* parent) {
     lv_obj_t* comp = lv_label_create(parent);
     lv_label_set_text(comp, "> SW");
     lv_obj_set_style_text_color(comp, lv_color_hex(0xBDD1F8), 0);
-    lv_obj_align(comp, LV_ALIGN_TOP_LEFT, 35, 18);
+    lv_obj_align(comp, LV_ALIGN_TOP_LEFT, 35, 28);
 
     // Reloj central
     lv_obj_t* time_lbl = lv_label_create(parent);
     lv_label_set_text(time_lbl, "08:42 PM");
     lv_obj_set_style_text_font(time_lbl, &lv_font_montserrat_16, 0);
     lv_obj_set_style_text_color(time_lbl, lv_color_hex(0xFFFFFF), 0);
-    lv_obj_align(time_lbl, LV_ALIGN_TOP_MID, 40, 18);
+    lv_obj_align(time_lbl, LV_ALIGN_TOP_MID, 40, 28);
 
     // Temperatura exterior
     lv_obj_t* temp_lbl = lv_label_create(parent);
     lv_label_set_text(temp_lbl, "27 °C");
     lv_obj_set_style_text_color(temp_lbl, lv_color_hex(0xBDD1F8), 0);
-    lv_obj_align(temp_lbl, LV_ALIGN_TOP_RIGHT, -35, 18);
+    lv_obj_align(temp_lbl, LV_ALIGN_TOP_RIGHT, -35, 28);
 }
 
 void ClusterView::create_central_gauge(lv_obj_t* parent) {
     // 1. Arco inferior amarillo/dorado decorativo (base del gauge)
     lv_obj_t* yellow_arc = lv_arc_create(parent);
-    lv_obj_set_size(yellow_arc, 300, 300);
+    lv_obj_set_size(yellow_arc, 360, 360);
     lv_arc_set_rotation(yellow_arc, 135);
     lv_arc_set_bg_angles(yellow_arc, 0, 70);
     lv_arc_set_range(yellow_arc, 0, 100);
@@ -50,7 +50,7 @@ void ClusterView::create_central_gauge(lv_obj_t* parent) {
 
     // 2. Tacómetro principal (RPM)
     rpm_arc = lv_arc_create(parent);
-    lv_obj_set_size(rpm_arc, 300, 300);
+    lv_obj_set_size(rpm_arc, 360, 360);
     lv_arc_set_rotation(rpm_arc, 135);
     lv_arc_set_bg_angles(rpm_arc, 0, 270);
     lv_arc_set_range(rpm_arc, 0, 6000);
@@ -69,7 +69,7 @@ void ClusterView::create_central_gauge(lv_obj_t* parent) {
     lv_label_set_text(rpm_lbl, "rpm x1000");
     lv_obj_set_style_text_font(rpm_lbl, &lv_font_montserrat_12, 0);
     lv_obj_set_style_text_color(rpm_lbl, lv_color_hex(0x6A84B5), 0);
-    lv_obj_align(rpm_lbl, LV_ALIGN_CENTER, 40, -85);
+    lv_obj_align(rpm_lbl, LV_ALIGN_CENTER, 40, -105);
 
     // Velocidad digital central
     speed_label = lv_label_create(parent);
@@ -83,13 +83,13 @@ void ClusterView::create_central_gauge(lv_obj_t* parent) {
     lv_label_set_text(unit, "km/h");
     lv_obj_set_style_text_font(unit, &lv_font_montserrat_14, 0);
     lv_obj_set_style_text_color(unit, lv_color_hex(0x8DA4D0), 0);
-    lv_obj_align(unit, LV_ALIGN_CENTER, 40, 25);
+    lv_obj_align(unit, LV_ALIGN_CENTER, 40, 35);
 }
 
 void ClusterView::create_left_panel(lv_obj_t* parent) {
     // Barra de Temperatura
     temp_bar = lv_bar_create(parent);
-    lv_obj_set_size(temp_bar, 6, 130);
+    lv_obj_set_size(temp_bar, 8, 180);
     lv_obj_align(temp_bar, LV_ALIGN_LEFT_MID, 50, 0);
     lv_bar_set_range(temp_bar, 0, 100);
     lv_bar_set_value(temp_bar, 45, LV_ANIM_OFF);
@@ -100,12 +100,12 @@ void ClusterView::create_left_panel(lv_obj_t* parent) {
     lv_obj_t* lbl_h = lv_label_create(parent);
     lv_label_set_text(lbl_h, "H");
     lv_obj_set_style_text_color(lbl_h, lv_color_hex(0xBDD1F8), 0);
-    lv_obj_align(lbl_h, LV_ALIGN_LEFT_MID, 45, -75);
+    lv_obj_align(lbl_h, LV_ALIGN_LEFT_MID, 45, -105);
 
     lv_obj_t* lbl_c = lv_label_create(parent);
     lv_label_set_text(lbl_c, "C");
     lv_obj_set_style_text_color(lbl_c, lv_color_hex(0xBDD1F8), 0);
-    lv_obj_align(lbl_c, LV_ALIGN_LEFT_MID, 45, 75);
+    lv_obj_align(lbl_c, LV_ALIGN_LEFT_MID, 45, 105);
 
     // Anillos concéntricos de eficiencia (Verde exterior, Amarillo medio, Azul interior)
     static const struct { int size; uint32_t color; int rot; int angle; } rings[] = {
@@ -141,7 +141,7 @@ void ClusterView::create_left_panel(lv_obj_t* parent) {
     lv_label_set_text(trip_title, "Drive Next\n. . . . . .\nCurrent Trip");
     lv_obj_set_style_text_font(trip_title, &lv_font_montserrat_14, 0);
     lv_obj_set_style_text_color(trip_title, lv_color_hex(0xFFFFFF), 0);
-    lv_obj_align(trip_title, LV_ALIGN_LEFT_MID, 160, -60);
+    lv_obj_align(trip_title, LV_ALIGN_LEFT_MID, 160, -90);
 
     // Lista de métricas (sustituyendo viñetas Unicode rotas por '-')
     lv_obj_t* trip_stats = lv_label_create(parent);
@@ -154,7 +154,7 @@ void ClusterView::create_left_panel(lv_obj_t* parent) {
 void ClusterView::create_right_panel(lv_obj_t* parent) {
     // Barra de Combustible
     fuel_bar = lv_bar_create(parent);
-    lv_obj_set_size(fuel_bar, 6, 130);
+    lv_obj_set_size(fuel_bar, 8, 180);
     lv_obj_align(fuel_bar, LV_ALIGN_RIGHT_MID, -50, 0);
     lv_bar_set_range(fuel_bar, 0, 100);
     lv_bar_set_value(fuel_bar, 75, LV_ANIM_OFF);
@@ -165,18 +165,18 @@ void ClusterView::create_right_panel(lv_obj_t* parent) {
     lv_obj_t* lbl_f = lv_label_create(parent);
     lv_label_set_text(lbl_f, "F");
     lv_obj_set_style_text_color(lbl_f, lv_color_hex(0xBDD1F8), 0);
-    lv_obj_align(lbl_f, LV_ALIGN_RIGHT_MID, -45, -75);
+    lv_obj_align(lbl_f, LV_ALIGN_RIGHT_MID, -45, -105);
 
     lv_obj_t* lbl_e = lv_label_create(parent);
     lv_label_set_text(lbl_e, "E");
     lv_obj_set_style_text_color(lbl_e, lv_color_hex(0xBDD1F8), 0);
-    lv_obj_align(lbl_e, LV_ALIGN_RIGHT_MID, -45, 75);
+    lv_obj_align(lbl_e, LV_ALIGN_RIGHT_MID, -45, 105);
 
     // Distance to empty
     lv_obj_t* dte_title = lv_label_create(parent);
     lv_label_set_text(dte_title, "Distance To Empty");
     lv_obj_set_style_text_color(dte_title, lv_color_hex(0xFFFFFF), 0);
-    lv_obj_align(dte_title, LV_ALIGN_RIGHT_MID, -120, -30);
+    lv_obj_align(dte_title, LV_ALIGN_RIGHT_MID, -120, -45);
 
     dte_label = lv_label_create(parent);
     lv_label_set_text(dte_label, "[Car] ---- 295 km");
@@ -191,25 +191,25 @@ void ClusterView::create_bottom_status(lv_obj_t* parent) {
     lv_label_set_text(acc_label, "ACC");
     lv_obj_set_style_text_font(acc_label, &lv_font_montserrat_16, 0);
     lv_obj_set_style_text_color(acc_label, lv_color_hex(0x00FF44), 0);
-    lv_obj_align(acc_label, LV_ALIGN_BOTTOM_LEFT, 240, -30);
+    lv_obj_align(acc_label, LV_ALIGN_BOTTOM_LEFT, 240, -40);
 
     // Modo CITY
     lv_obj_t* mode = lv_label_create(parent);
     lv_label_set_text(mode, "CITY");
     lv_obj_set_style_text_color(mode, lv_color_hex(0xFFFFFF), 0);
-    lv_obj_align(mode, LV_ALIGN_BOTTOM_LEFT, 310, -30);
+    lv_obj_align(mode, LV_ALIGN_BOTTOM_LEFT, 310, -40);
 
     // Testigo Freno (!)
     lv_obj_t* brake = lv_label_create(parent);
     lv_label_set_text(brake, "(!)");
     lv_obj_set_style_text_color(brake, lv_color_hex(0xFF2222), 0);
-    lv_obj_align(brake, LV_ALIGN_BOTTOM_MID, 70, -30);
+    lv_obj_align(brake, LV_ALIGN_BOTTOM_MID, 70, -40);
 
     // Odómetro
     odo_label = lv_label_create(parent);
     lv_label_set_text(odo_label, "ODO   487 km");
     lv_obj_set_style_text_color(odo_label, lv_color_hex(0xBDD1F8), 0);
-    lv_obj_align(odo_label, LV_ALIGN_BOTTOM_RIGHT, -180, -30);
+    lv_obj_align(odo_label, LV_ALIGN_BOTTOM_RIGHT, -180, -40);
 }
 
 void ClusterView::update(const ClusterState& data) {
